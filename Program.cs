@@ -10,22 +10,33 @@ namespace Interface
     {
         static void Main(string[] args)
         {
-            Console.Write("Buscar em Esportes ou Times [E/T]? ");
-            ConsoleKeyInfo escolha = Console.ReadKey();
+            ConsoleKeyInfo escolha;
+            string criterio;
 
-            Console.Write("\n Digite criterio de busca: ");
-            string criterio = Console.ReadLine();
+            do
+            {
+                Console.Write("Buscar em Esportes ou Times [E/T]? ");
+                escolha = Console.ReadKey();
+                Console.WriteLine();
+
+            } while ((escolha.Key != ConsoleKey.E) && (escolha.Key != ConsoleKey.T));
+
+            Console.Write("Digite criterio de busca: ");
+            criterio = Console.ReadLine();
 
             Dicionario buscar = new Dicionario(escolha, criterio);
 
-            List<string> lista = buscar.Procurar();
+            IEnumerable<string> lista = buscar.Procurar();
 
-            Console.WriteLine("Resultado: \n");
-
-            foreach (var item in lista)
+            if (lista.Count() != 0)
             {
-                Console.WriteLine(item.ToString());
+                Console.WriteLine("\nResultado: ");
+                foreach (var item in lista)
+                    Console.WriteLine(item.ToString());
             }
+            else
+                Console.WriteLine("Não há ocorrências com o critério escolhido.");
+
 
             Console.ReadLine();
         }

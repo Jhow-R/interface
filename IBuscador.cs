@@ -8,6 +8,6 @@ namespace Interface
 {
     interface IBuscador
     {
-        List<string> GetResultado(string criterio);     
+        IEnumerable<string> GetResultado(string criterio);     
     }
 }

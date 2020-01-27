@@ -17,18 +17,14 @@ namespace Interface
             this.escolha = escolha;
         }
 
-        public List<string> Procurar()
+        public IEnumerable<string> Procurar()
         {
-            IBuscador procurar = new Buscador();
+            IBuscador procurar;
 
             if (escolha.Key == ConsoleKey.E)
-            {
-                procurar = new Buscador();
-            }
+                procurar = new BuscadorEsportes();
             else
-            {
                 procurar = new BuscadorTimes();
-            }
 
             return procurar.GetResultado(criterio);
         }
